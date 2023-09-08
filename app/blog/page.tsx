@@ -1,9 +1,7 @@
-import React from "react";
-
 function Blog() {
   return (
     <>
-      <h6>blog page</h6>
+      <h1>Blog</h1>
     </>
   );
 }
