@@ -1,2 +1,2 @@
 - Projeye buradan ulaşabilirsiniz :)
-- https://hero-tech-next.vercel.app/
+- https://memento-next-rho.vercel.app/
