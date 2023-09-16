@@ -1,5 +1,5 @@
 import Link from "next/link";
-import getUsers from "../libs/getUsers";
+import getUsers from "@/libs/getUsers";
 
 export default async function UsersPage() {
   const users = await getUsers();
