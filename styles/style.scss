@@ -28,15 +28,296 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 80px;
+    position: relative;
+
+    //&_logo
+    &_logo {
+      position: relative;
+      z-index: 3;
+      img {
+        cursor: pointer;
+      }
+    }
 
     //&_menu
     &_menu {
-      li {
+      > li {
         display: inline-block;
-        margin-right: 30px;
+        position: relative;
+        margin-right: 25px;
         &:last-child {
           margin-right: 0;
+        }
+        > a {
+          font-family: $two_family;
+          color: $primary_color;
+          @include weight(medium);
+          font-size: $regular_size;
+          text-transform: uppercase;
+          position: relative;
+          &::before {
+            position: absolute;
+            width: 0;
+            margin: -4px 0;
+            transition: 0.4ms all ease-in-out;
+            content: "";
+            background-color: $two_color;
+            height: 4px;
+            border-radius: 2px;
+            left: 0;
+            bottom: 0;
+          }
+          &:hover {
+            color: $two_color;
+            &::before {
+              width: 100%;
+            }
+          }
+          &:not(:only-child):after {
+            padding-left: 0;
+            content: "▾";
+          }
+        }
+        .active {
+          position: relative;
+          &::before {
+            position: absolute;
+            width: 0;
+            margin: -5px 0;
+            transition: 0.4ms all ease-in-out;
+            content: "";
+            background-color: $two_color;
+            height: 4px;
+            border-radius: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+        .active,
+        a.active {
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    //&_hamburger
+    &_hamburger {
+      display: none;
+      position: absolute;
+      top: 27px;
+      right: 15px;
+      transition: 0.5s all ease-in-out;
+      cursor: pointer;
+      z-index: 999;
+      .icon {
+        font-size: 30px;
+        color: $two_color;
+      }
+    }
+
+    //Notebook
+    @include notebook {
+      //&_menu
+      &_menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: $base_color;
+        z-index: 2;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transform: scale(0);
+        opacity: 0;
+        transition: opacity 650ms;
+        li {
+          display: block;
+          margin-right: 0;
+          padding-bottom: 30px;
+          &:last-child {
+            padding-bottom: 0;
+          }
+          a {
+            font-size: $large_size;
+            font-weight: bold;
+            color: $primary_color;
+            &::before {
+              background-color: $two_color;
+            }
+          }
+          //dropdown
+          .dropdown {
+            width: 100%;
+            top: 30px;
+            padding: 15px 0;
+            li {
+              padding-bottom: 12px;
+              &:last-child {
+                padding-bottom: 0;
+              }
+              a {
+                font-size: 12px;
+                line-height: normal;
+              }
+            }
+          }
+        }
+      }
+      //dropdown
+      .dropdown.open {
+        opacity: 1;
+      }
+      &_menu.open {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      //&_hamburger
+      &_hamburger {
+        display: block;
+        .times {
+          display: none;
+        }
+      }
+      &_hamburger.open {
+        .bars {
+          display: none;
+        }
+        .times {
+          display: block;
+        }
+      }
+    }
+  }
+}
+#header.scroll {
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.35);
+  position: fixed;
+  transition: 0.3s all ease-in-out;
+  top: 0;
+  z-index: 2;
+  background-color: #eee;
+
+  //header
+  .header {
+    //&_hamburger
+    &_hamburger {
+      top: 27px;
+    }
+  }
+}
+
+//Teams
+#teams {
+  width: 100%;
+  padding: 100px 0 70px 0;
+
+  //teams
+  .teams {
+    text-align: center;
+    //&_item
+    &_item {
+      margin-bottom: 30px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+      h6 {
+        padding-top: 15px;
+        line-height: 21px;
+        a {
+          font-family: $one_family;
+          font-size: $large_size;
+          text-transform: capitalize;
+          color: $primary_color;
+        }
+      }
+      .read_more {
+        display: inline-block;
+        width: 100%;
+        margin-top: 20px;
+        background-color: $two_color;
+        padding: 10px 0;
+        color: $base_color;
+        text-transform: uppercase;
+        font-size: $regular_size;
+        @include weight(semi-bold);
+      }
+
+      //Tablet
+      @include tablet {
+        h6 {
+          padding-top: 10px;
+          line-height: normal;
+          a {
+            font-size: $regular_size;
+          }
+        }
+      }
+      //Mobil
+      @include mobil {
+        h6 {
+          line-height: 16px;
+          a {
+            font-size: $small_size;
+          }
+        }
+        .read_more {
+          margin-top: 15px;
+          font-size: $small_size;
+        }
+      }
+    }
+  }
+}
+
+//Teams_Details#
+#teams_details {
+  width: 100%;
+  padding: 100px 0;
+
+  //teams_details
+  .teams_details {
+    //&_image
+    &_image {
+      img {
+        width: 100%;
+      }
+    }
+    //&_text
+    &_text {
+      h6 {
+        font-size: $large_size;
+        line-height: normal;
+      }
+    }
+
+    //Notebook
+    @include notebook {
+      //&_text
+      &_text {
+        h6 {
+          font-size: $regular_size;
+        }
+      }
+    }
+    //X-Tablet
+    @include x-tablet {
+      //&_text
+      &_text {
+        margin-top: 20px;
+        text-align: center;
+        h6 {
+          font-size: $regular_size;
         }
       }
     }
@@ -54,8 +335,27 @@ body {
   padding: 15px 0;
   background-color: $base_color;
 
-  //text
-  .text {
-    text-align: center;
+  //footer
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_right {
+      font-family: $one_family;
+      font-size: $regular_size;
+      line-height: normal;
+    }
+
+    //Notebook
+    @include notebook {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      //&_left
+      &_left {
+        margin-bottom: 10px;
+      }
+    }
   }
 }

@@ -1,10 +1,11 @@
-import UsersPage from "./users/page";
+import React from "react";
 
-export default function Home() {
+function Home() {
   return (
     <>
-      <h1>Home Page</h1>
-      <UsersPage />
+      <div>Home</div>
     </>
   );
 }
+
+export default Home;
